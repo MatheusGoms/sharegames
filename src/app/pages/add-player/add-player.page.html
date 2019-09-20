@@ -1,37 +1,42 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-player</ion-title>
+    <ion-title>Cadastro do Player</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Nome</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+  <form #fc="ngForm" (ngSubmit)="onsubmit(fc)">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="player.nome" name="nome" requered></ion-input>
+    </ion-item>
+    {{player.nome}}
+    <ion-item>
+      <ion-label position="floating">NickName</ion-label>
+      <ion-input type="text" [(ngModel)]="player.name" name="nickname" requered></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">NickName</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" [(ngModel)]="player.email" name="email" requered></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">E-mail</ion-label>
-    <ion-input type="email"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="player.pws" name="pws" requered minlength="6" #pws="ngModel"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Senha</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
+    <ion-text color="danger" *ngIf="pws.invalid && pws.dirty">Senha muito curta</ion-text>
+    
+    <ion-item>
+      <ion-label position="floating">Confirmar Senha</ion-label>
+      <ion-input type="password" (ngModel)="conf" name="conf" requered #conf="ngModel"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="(pws.value  != conf.value) && pws.dirty">Senhas diferentes</ion-text>
 
-  <ion-item>
-    <ion-label position="floating">Confirmar Senha</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
-
-  <ion-item lines="none">
-    <ion-button slot="end" color="primary">Salvar</ion-button>
-    <ion-button slot="end" color="danger">Cancelar</ion-button>
-  </ion-item>
+    <ion-item lines="none">
+      <ion-button slot="end" type="submit" color="primary">Salvar</ion-button>
+      <ion-button slot="end" type="reset" color="danger">Cancelar</ion-button>
+    </ion-item>
+  </form>
 </ion-content>
