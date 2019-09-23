@@ -18,12 +18,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'listPlayer',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../pages/list-player/list-player.module').then(m => m.ListPlayerPageModule)
           }
         ]
       },

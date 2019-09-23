@@ -17,7 +17,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore'
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig), AngularFireModule],
+    AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule],
   providers: [
     StatusBar,
     SplashScreen,

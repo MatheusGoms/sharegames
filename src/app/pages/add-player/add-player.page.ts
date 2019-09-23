@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../../model/player';
+import { PlayerService } from '../../services/player.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-player',
@@ -10,9 +12,35 @@ export class AddPlayerPage implements OnInit {
 
   protected player: Player = new Player;
 
-  constructor() { }
-
+  constructor(
+  protected playerService:PlayerService,
+  protected alertController: AlertController,
+  ) { }
   ngOnInit() {
   }
 
+  onsubmit(form){
+    this.playerService.save(this.player).then(
+      res=>{
+        console.log("Cadastrado!");
+        this.presentAlert("Aviso", "Cadastrado!");
+      },
+      erro=>{
+        console.log("Erro: " + erro);
+        this.presentAlert("Erro", "Não foi possivel ser cadastrado");
+      }
+    )
+  }
+
+  //alerts...................................
+  async presentAlert(tipo:string, texto:string) {
+    const alert = await this.alertController.create({
+      header: tipo,
+      //subHeader: 'Subtitle',
+      message: texto,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }
