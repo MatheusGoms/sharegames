@@ -15,7 +15,26 @@ export class ListPlayerPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.players = this.playerService.getAll();
+   this.playerService.getAll().subscribe(
+     res=>{
+       this.players = res;
+     }
+   )
+    
   }
 
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.playerService.getAll().subscribe(
+      res => {
+        this.players = res
+        setTimeout(() => {
+          console.log('Async operation has ended');
+          event.target.complete();
+        }, 0);
+      }
+    );
+  }
 }
+
+
