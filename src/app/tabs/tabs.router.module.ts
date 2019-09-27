@@ -28,12 +28,32 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'listGamer',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/list-gamer/list-gamer.module').then(m => m.ListGamerPageModule)
+          }
+        ]
+      },
+      {
         path: 'perfilPlayer/:id',
         children: [
           {
             path: '',
             loadChildren: () =>
               import('../pages/perfil-player/perfil-player.module').then(m => m.PerfilPlayerPageModule)
+          }
+        ]
+      },
+      {
+        path: 'perfilGamer/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/perfil-gamer/perfil-gamer.module').then(m => m.PerfilGamerPageModule)
           }
         ]
       },
@@ -53,6 +73,17 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
+            
+            //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
+          }
+        ]
+      },
+      {
+        path: 'addGamer',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-gamer/add-gamer.module').then(m => m.AddGamerPageModule)
             
             //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
           }

@@ -1,25 +1,26 @@
 <ion-header>
     <ion-toolbar>
       <ion-title>
-        Players
+        Gamers
       </ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button color="danger" routerLink="/tabs/addPlayer">
+      <ion-fab-button color="danger" routerLink="/tabs/addGamer">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   
-    <ion-list *ngIf="players">
-      <ion-item *ngFor="let p of players" routerLink="/tabs/perfilPlayer/{{p.key}}">
+    <ion-list *ngIf="gamer">
+      <ion-item *ngFor="let g of gamer" routerLink="/tabs/perfilGamer/{{g.key}}">
         <ion-avatar slot="start">
           <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
         </ion-avatar>
-        <ion-label>{{ p.nickname }}</ion-label>
-        <ion-text>{{ p.email }}</ion-text>
+        <ion-label>{{ g.nome }}</ion-label>
+        <ion-text>{{ g.categoria }}</ion-text>
+  
       </ion-item>
     </ion-list>
   
