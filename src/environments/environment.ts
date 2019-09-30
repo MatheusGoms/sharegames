@@ -9,13 +9,11 @@ export const environment = {
     authDomain: "sharegames-ea19b.firebaseapp.com",
     databaseURL: "https://sharegames-ea19b.firebaseio.com",
     projectId: "sharegames-ea19b",
-    storageBucket: "",
+    storageBucket: "sharegames-ea19b.appspot.com",
     messagingSenderId: "846569281584",
     appId: "1:846569281584:web:05750c002667a3071f35f5"
   }
-
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

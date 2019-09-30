@@ -10,7 +10,7 @@
       <ion-label position="floating">Nome</ion-label>
       <ion-input type="text" [(ngModel)]="player.nome" name="nome" required></ion-input>
     </ion-item>
-    {{player.nome}}
+
     <ion-item>
       <ion-label position="floating">NickName</ion-label>
       <ion-input type="text" [(ngModel)]="player.nickname" name="nickname" required></ion-input>
@@ -25,17 +25,17 @@
       <ion-label position="floating">Senha</ion-label>
       <ion-input type="password" [(ngModel)]="player.pws" name="pws" required minlength="6" #pws="ngModel"></ion-input>
     </ion-item>
-      <ion-text color="danger" *ngIf="pws.invalid && pws.dirty">Senha muito curta</ion-text>
-    
+    <ion-text color="danger" *ngIf="pws.invalid && pws.dirty">Senha muito curta.</ion-text>
+
     <ion-item>
       <ion-label position="floating">Confirmar Senha</ion-label>
       <ion-input type="password" (ngModel)="conf" name="conf" required #conf="ngModel"></ion-input>
     </ion-item>
-    <ion-text color="danger" *ngIf="(pws.value  != conf.value) && pws.dirty">Senhas diferentes</ion-text>
+    <ion-text color="danger" *ngIf="(pws.value != conf.value) && pws.dirty">Senhas diferentes.</ion-text>
 
     <ion-item lines="none">
-      <ion-button slot="end" type="submit" color="primary">Salvar</ion-button>
-      <ion-button slot="end" type="reset" color="danger">Cancelar</ion-button>
+      <ion-button type="submit" color="primary" [disabled]="fc.invalid || (pws.value != conf.value)">Salvar</ion-button>
+      <ion-button type="reset" color="danger">Cancelar</ion-button>
     </ion-item>
   </form>
 </ion-content>

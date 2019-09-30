@@ -83,3 +83,12 @@
   --ion-color-gamer-shade: #eebbaa;
   --ion-color-gamer-tint: #eebbaa;
 }
+
+.gamer {
+  --ion-color-base: var(--ion-color-gamer);
+  --ion-color-base-rgb: var(--ion-color-gamer-rgb);
+  --ion-color-contrast: var(--ion-color-gamer-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-gamer-contrast-rgb);
+  --ion-color-shade: var(--ion-color-gamer-shade);
+  --ion-color-tint: var(--ion-color-gamer-tint);
+}

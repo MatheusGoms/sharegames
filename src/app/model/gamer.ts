@@ -4,7 +4,8 @@ export class Gamer {
     categoria: string;
     console: string;
     descricao: string;
-    quant: string;
-    valor: string;
-    ativo:boolean = true;
+    quant: number;
+    valor: number;
+    ativo: boolean = true;
+
 }

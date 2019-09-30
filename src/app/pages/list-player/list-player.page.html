@@ -12,24 +12,33 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-  
     <ion-list *ngIf="players">
-      <ion-item *ngFor="let p of players" routerLink="/tabs/perfilPlayer/{{p.key}}">
-        <ion-avatar slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-        <ion-label>{{ p.nickname }}</ion-label>
-        <ion-text>{{ p.email }}</ion-text>
-      </ion-item>
+      <ion-item-sliding *ngFor="let p of players">
+        <ion-item-options side="start">
+          <ion-item-option color="" (click)="editar(p)">
+            <ion-icon slot="icon-only" name="create"></ion-icon>Atualizar
+          </ion-item-option>
+        </ion-item-options>
+  
+        <ion-item routerLink="/tabs/perfilPlayer/{{p.key}}">
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+          <ion-label>{{ p.nickname }}</ion-label>
+          <ion-text>{{ p.email }}</ion-text>
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="apagar(p)">
+            <ion-icon slot="icon-only" name="create" ></ion-icon>Delete
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content
-        pullingIcon="arrow-dropdown"
-        pullingText="Pull to refresh"
-        refreshingSpinner="circles"
-        refreshingText="Refreshing...">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
       </ion-refresher-content>
     </ion-refresher>
   
-  <ion-content>
+    <ion-content>
