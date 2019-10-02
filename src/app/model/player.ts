@@ -4,5 +4,6 @@ export class Player {
     nickname:string;
     email:string;
     pws:string;
+    foto: string = null;
     ativo:boolean = true;
 }

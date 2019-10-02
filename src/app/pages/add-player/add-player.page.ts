@@ -29,6 +29,10 @@ protected preview: any = null;
   }
 
   onsubmit(form){
+    if (!this.preview){
+      this.presentAlert("Erro","deve cadastrar ao menos uma foto!");
+    }else
+    if (this.id){
     this.playerService.save(this.player).then(
       res=>{
         form.reset();
@@ -45,7 +49,7 @@ protected preview: any = null;
       }
     )
   }
-
+  }
 tirarFoto(){
   const options: CameraOptions = {
     quality: 100,
