@@ -14,72 +14,73 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 })
 export class AddPlayerPage implements OnInit {
 
-protected player:Player = new Player;
-protected id: any = null;
-protected preview: any = null;
+  protected player: Player = new Player;
+  protected id: any = null;
+  protected preview: any = null;
 
   constructor(
-    protected playerService:PlayerService,
-    protected alertController:AlertController,
-    protected router:Router,
+    protected playerService: PlayerService,
+    protected alertController: AlertController,
+    protected router: Router,
     private camera: Camera
   ) { }
 
   ngOnInit() {
   }
 
-  onsubmit(form){
-    if (!this.preview){
-      this.presentAlert("Erro","deve cadastrar ao menos uma foto!");
-    }else
-    if (this.id){
-    this.playerService.save(this.player).then(
-      res=>{
-        form.reset();
-        this.player = new Player;
-        
-        //  console.log("Cadastrado!");
-        this.presentAlert("Aviso", "Cadastrado!");
-        this.router.navigate(['/tabs/listPlayer']);
-      },
-      erro=>{
-        console.log("Erro: " + erro);
-        this.presentAlert("Erro", "Não foi possível cadastrar!");
+  onsubmit(form) {
+    if (!this.preview) {
+      this.presentAlert("Erro", "deve cadastrar ao menos uma foto!");
+    } else
+      if (this.id) {
+        this.player.foto = this.preview;
+        this.playerService.save(this.player).then(
+          res => {
+            form.reset();
+            this.player = new Player;
 
+            //  console.log("Cadastrado!");
+            this.presentAlert("Aviso", "Cadastrado!");
+            this.router.navigate(['/tabs/listPlayer']);
+          },
+          erro => {
+            console.log("Erro: " + erro);
+            this.presentAlert("Erro", "Não foi possível cadastrar!");
+
+          }
+        )
       }
-    )
   }
+  tirarFoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.preview = base64Image;
+    }, (err) => {
+      // Handle error
+    });
   }
-tirarFoto(){
-  const options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
-  }
-  
-  this.camera.getPicture(options).then((imageData) => {
-   // imageData is either a base64 encoded string or a file URI
-   // If it's base64 (DATA_URL):
-   let base64Image = 'data:image/jpeg;base64,' + imageData;
-   this.preview = base64Image;
-  }, (err) => {
-   // Handle error
-  });
-}
-// Alert 
+  // Alert 
 
 
-async presentAlert(tipo:string, texto:string) {
-  const alert = await this.alertController.create({
-    header: tipo,
-  //  subHeader: 'Subtitle',
-    message: texto,
-    buttons: ['OK']
-  });
+  async presentAlert(tipo: string, texto: string) {
+    const alert = await this.alertController.create({
+      header: tipo,
+      //  subHeader: 'Subtitle',
+      message: texto,
+      buttons: ['OK']
+    });
 
-  await alert.present();
-}
+    await alert.present();
+  }
 
 }
 
