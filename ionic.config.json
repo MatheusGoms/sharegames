@@ -1,5 +1,7 @@
 {
   "name": "shareGamesBS2018.2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
