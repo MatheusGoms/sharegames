@@ -7,13 +7,15 @@
     </ion-tab-button>
 
     <ion-tab-button tab="listPlayer">
-      <ion-icon name="logo-game-controller-a"></ion-icon>
-      <ion-label>Players</ion-label>
+      <ion-icon name="contacts"></ion-icon>
+      <ion-badge color="danger" *ngIf="quantPlayer > 0">{{quantPlayer}}</ion-badge>
+      <ion-label>Player</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="listGamer">
       <ion-icon name="send"></ion-icon>
-      <ion-label>Jogos</ion-label>
+      <ion-badge color="danger">{{quantGamer}}</ion-badge>
+      <ion-label>Lista de Jogos</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

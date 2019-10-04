@@ -20,7 +20,10 @@ export class PlayerService {
         nickname: player.nickname,
         email: player.email,
         pws: player.pws,
-        ativo: true
+        foto: player.foto,
+        ativo: true,
+        lat:player.lat,
+        lng:player.lng
       });
   }
 
@@ -37,10 +40,11 @@ export class PlayerService {
     return this.fire.collection("players").doc<Player>(id).valueChanges();
   }
 
+
   update(player: Player, id: string){
     return this.fire.collection("players").doc<Player>(id).update(player);
   }
-  remove(player:any){
+  remove(player){
     return this.fire.collection("players").doc(player.key).delete();
   }
 }

@@ -73,7 +73,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
-
+            
             //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
           }
         ]
@@ -84,24 +84,23 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
-
+            
             //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
           }
         ]
       },
-
       {
         path: 'addGamer',
         children: [
           {
             path: '',
             loadChildren: () => import('../pages/add-gamer/add-gamer.module').then(m => m.AddGamerPageModule)
-
+            
             //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
           }
         ]
       },
-
+      
       {
         path: '',
         redirectTo: '/tabs/tab1',
@@ -120,4 +119,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule { }
+export class TabsPageRoutingModule {}
