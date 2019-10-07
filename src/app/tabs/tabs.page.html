@@ -1,21 +1,21 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
+    <ion-tab-button tab="home">
       <ion-icon name="home"></ion-icon>
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="listPlayer">
       <ion-icon name="contacts"></ion-icon>
-      <ion-badge color="danger" *ngIf="quantPlayer > 0">{{quantPlayer}}</ion-badge>
-      <ion-label>Player</ion-label>
+      <ion-badge color="danger" *ngIf="quantPlayer">{{quantPlayer}}</ion-badge>
+      <ion-label>Players</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="listGamer">
-      <ion-icon name="send"></ion-icon>
-      <ion-badge color="danger">{{quantGamer}}</ion-badge>
-      <ion-label>Lista de Jogos</ion-label>
+    <ion-tab-button tab="listGames">
+      <ion-icon name="logo-game-controller-b"></ion-icon>
+      <ion-badge color="danger"*ngIf="quantGames">{{quantGames}}</ion-badge>
+      <ion-label>Games</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

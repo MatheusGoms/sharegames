@@ -6,7 +6,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-
 @Component({
   selector: 'app-add-player',
   templateUrl: './add-player.page.html',
@@ -17,6 +16,8 @@ export class AddPlayerPage implements OnInit {
   protected player: Player = new Player;
   protected id: any = null;
   protected preview: any = null;
+  protected posLat: number = 0;
+  protected posLng: number = 0;
 
   constructor(
     protected playerService: PlayerService,
@@ -33,23 +34,23 @@ export class AddPlayerPage implements OnInit {
       this.playerService.get(this.id).subscribe(
         res => {
           this.player = res
+          this.preview = this.player.foto
         },
-        erro => this.id = null
+        //erro => this.id = null
       )
     }
+    //Localização atual
+    this.localAtual()
   }
 
   onsubmit(form) {
     if (!this.preview) {
-      this.presentAlert("Erro", "Deve inserir foto do perfil!");
+      this.presentAlert("Erro", "Deve inserir uma foto do perfil!");
     } else {
       this.player.foto = this.preview;
-      this.geolocation.getCurrentPosition().then((resp) => {
-        this.player.lat = resp.coords.latitude
-        this.player.lng = resp.coords.longitude
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
+      this.player.lat = this.posLat;
+      this.player.lng = this.posLng;
+
       if (!this.id) {
         this.playerService.save(this.player).then(
           res => {
@@ -57,7 +58,7 @@ export class AddPlayerPage implements OnInit {
             this.player = new Player;
             //console.log("Cadastrado!");
             this.presentAlert("Aviso", "Cadastrado!")
-            this.router.navigate(['/tabs/listPlayer']);
+            this.router.navigate(['/tabs/perfilPlayer', res.id]);
           },
           erro => {
             console.log("Erro: " + erro);
@@ -70,7 +71,7 @@ export class AddPlayerPage implements OnInit {
             form.reset();
             this.player = new Player;
             this.presentAlert("Aviso", "Atualizado!")
-            this.router.navigate(['/tabs/listPlayer']);
+            this.router.navigate(['/tabs/perfilPlayer', this.id]);
           },
           erro => {
             console.log("Erro: " + erro);
@@ -99,6 +100,16 @@ export class AddPlayerPage implements OnInit {
     });
   }
 
+  localAtual() {
+    this.geolocation.getCurrentPosition().then(
+      resp => {
+        this.posLat = resp.coords.latitude;
+        this.posLng = resp.coords.longitude;
+      }).catch(
+        error => {
+          console.log('Não foi possivel pegar sua localização!', error);
+        });
+  }
 
   //Alerts-------------------
   async presentAlert(tipo: string, texto: string) {

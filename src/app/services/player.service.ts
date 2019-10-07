@@ -21,9 +21,9 @@ export class PlayerService {
         email: player.email,
         pws: player.pws,
         foto: player.foto,
-        ativo: true,
-        lat:player.lat,
-        lng:player.lng
+        ativo: player.ativo,
+        lat: player.lat,
+        lng: player.lng
       });
   }
 
@@ -36,15 +36,16 @@ export class PlayerService {
       )
   }
 
-  get(id){
+  get(id) {
     return this.fire.collection("players").doc<Player>(id).valueChanges();
   }
 
-
-  update(player: Player, id: string){
-    return this.fire.collection("players").doc<Player>(id).update(player);
+  update(player: Player, id: string) {
+    return this.fire.collection("players").doc<Player>(id)
+      .update(player);
   }
-  remove(player){
+
+  remove(player: any) {
     return this.fire.collection("players").doc(player.key).delete();
   }
 }

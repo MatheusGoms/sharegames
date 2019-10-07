@@ -20,9 +20,9 @@ export class PerfilPlayerPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    if (this.id){
+    if (this.id) {
       this.playerService.get(this.id).subscribe(
-        res=>{
+        res => {
           this.player = res
         }
       )

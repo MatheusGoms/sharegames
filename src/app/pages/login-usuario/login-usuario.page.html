@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Login do Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #fc="ngForm" (ngSubmit)="onSubmit(fc)">
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="email" #e="ngModel" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" name="pws" [(ngModel)]="pws" #p="ngModel" minlength="6" required></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="p.invalid && p.dirty">
+      <strong>Senha muito curta!</strong>
+    </ion-text>
+
+    <ion-item lines="none">
+      <ion-button type="submit" color="primary" [disabled]="fc.invalid">Entrar</ion-button>
+      <ion-button type="reset" [routerLink]="[('/')]" color="primary">Cancelar</ion-button>
+    </ion-item>
+  </form>
+
+</ion-content>
+
+<ion-content padding>
+
+  <ion-button expand="block" fill="outline" color="medium" (click)="loginGoogle()">
+    <ion-icon slot="start" name="logo-google"></ion-icon>
+    Entrar com Google
+  </ion-button>
+
+  <ion-button expand="block" fill="outline" color="medium" (click)="logout()" href="/tabs">
+    <ion-icon name="log-out"></ion-icon>
+    Sair do usuário
+  </ion-button>
+
+</ion-content>

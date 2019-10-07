@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">Inicio</ion-title>
+    <ion-title slot="end">
+      <ion-icon name="person" routerLink="/tabs/login"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let game of games" routerLink="/tabs/perfilGame/{{game.key}}">
+    <img src="https://picsum.photos/400/200" />
+    <ion-card-header>
+      <ion-card-subtitle>{{game.console}}</ion-card-subtitle>
+      <ion-card-title>{{game.nome}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{game.descricao}}</p>
+      <p class="valor">{{game.valor | currency:"BRL"}}</p>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

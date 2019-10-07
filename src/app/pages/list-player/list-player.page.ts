@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from 'src/app/services/player.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-list-player',
@@ -20,16 +19,11 @@ export class ListPlayerPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.refreshPlayers()
+    this.refreshPlayers();
   }
 
-
-  apagar(player) {
-   this.presentAlertConfirm(player);
-  }
-
-  editar(player) {
-    this.router.navigate(['/tabs/addPlayer/' + player.key])
+   editar(player) {
+    this.router.navigate(['/tabs/addPlayer/', player.key])
   }
 
   async doRefresh(event) {
@@ -52,6 +46,7 @@ export class ListPlayerPage implements OnInit {
       }
     )
   }
+
   //Alerts-------------------
   async presentAlert(tipo: string, texto: string) {
     const alert = await this.alertController.create({
@@ -63,38 +58,34 @@ export class ListPlayerPage implements OnInit {
     await alert.present();
   }
 
-
-async presentAlertConfirm(player) {
-  const alert = await this.alertController.create({
-    header: 'Apagar dados!',
-    message: 'Apagador todos os dados do Player!!!',
-    buttons: [
-      {
-        text: 'Não',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: (blah) => {
-          console.log('Confirm Cancel: blah');
+  async apagar(player) {
+    const alert = await this.alertController.create({
+      header: 'Apagar dados!',
+      message: 'Apagar todos os dados do Player',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.playerService.remove(player).then(
+              res => {
+                this.presentAlert("Aviso", "Apagado com sucesso!");
+                this.refreshPlayers();
+              },
+              erro => {
+                this.presentAlert("Erro", "Ao apagar o item!");
+              }
+            )
+          }
         }
-      }, {
-        text: 'Sim',
-        handler: () => {
-          this.playerService.remove(player).then(
-            res => {
-              this.presentAlert("Aviso", "Apagado com sucesso!")
-              this.refreshPlayers()
-            },
-            erro => {
-              this.presentAlert("Erro", "Ao apagar o Item");
-            }
-          )
-          console.log('Confirm Okay');
-        }
-      }
-    ]
-  });
-  await alert.present();
+      ]
+    });
+    await alert.present();
+  }
 }
-
-}
-

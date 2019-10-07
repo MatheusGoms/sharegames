@@ -6,14 +6,15 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  { path: 'list-player', loadChildren: './pages/list-player/list-player.module#ListPlayerPageModule' },
-  { path: 'perfil-player', loadChildren: './pages/perfil-player/perfil-player.module#PerfilPlayerPageModule' },
-  { path: 'add-gamer', loadChildren: './pages/add-gamer/add-gamer.module#AddGamerPageModule' },
-  { path: 'list-player', loadChildren: './pages/list-player/list-player.module#ListPlayerPageModule' },
-  { path: 'list-gamer', loadChildren: './pages/list-gamer/list-gamer.module#ListGamerPageModule' },
-  { path: 'perfil-gamer', loadChildren: './pages/perfil-gamer/perfil-gamer.module#PerfilGamerPageModule' },
+  { path: 'login-usuario', loadChildren: './pages/login-usuario/login-usuario.module#LoginUsuarioPageModule' }
+  // { path: 'list-player', loadChildren: './pages/list-player/list-player.module#ListPlayerPageModule' },
+  // { path: 'perfil-player', loadChildren: './pages/perfil-player/perfil-player.module#PerfilPlayerPageModule' },
+  // { path: 'add-game', loadChildren: './pages/add-game/add-game.module#AddGamePageModule' },
+  // { path: 'list-game', loadChildren: './pages/list-game/list-game.module#ListGamePageModule' },
+  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
+  // { path: 'perfil-game', loadChildren: './pages/perfil-game/perfil-game.module#PerfilGamePageModule' },
   // { path: 'add-player', loadChildren: './pages/add-player/add-player.module#AddPlayerPageModule' }
-];
+  ];
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

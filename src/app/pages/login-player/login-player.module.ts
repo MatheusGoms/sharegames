@@ -5,14 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddPlayerPage } from './add-player.page';
-
-import { Camera } from '@ionic-native/camera/ngx';
+import { LoginPlayerPage } from './login-player.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddPlayerPage
+    component: LoginPlayerPage
   }
 ];
 
@@ -21,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
-  providers:[Camera],
-  declarations: [AddPlayerPage]
+  declarations: [LoginPlayerPage]
 })
-export class AddPlayerPageModule {}
+export class LoginPlayerPageModule {}
