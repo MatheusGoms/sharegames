@@ -20,6 +20,7 @@ export class GameService {
         categoria: game.categoria,
         console: game.console,
         quant: game.quant,
+        foto: game.foto,
         valor: game.valor,
         ativo: game.ativo
       });
@@ -36,5 +37,14 @@ export class GameService {
 
   get(id) {
     return this.fire.collection("games").doc<Game>(id).valueChanges();
+  }
+
+  update(game: Game, id: string) {
+    return this.fire.collection("games").doc<Game>(id)
+      .update(game);
+  }
+
+  remove(game: any) {
+    return this.fire.collection("games").doc(game.key).delete();
   }
 }

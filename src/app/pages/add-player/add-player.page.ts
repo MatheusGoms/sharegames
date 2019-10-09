@@ -12,7 +12,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   styleUrls: ['./add-player.page.scss'],
 })
 export class AddPlayerPage implements OnInit {
-
+  
   protected player: Player = new Player;
   protected id: any = null;
   protected preview: any = null;

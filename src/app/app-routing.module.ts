@@ -6,7 +6,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  { path: 'login-usuario', loadChildren: './pages/login-usuario/login-usuario.module#LoginUsuarioPageModule' }
+  // { path: 'login-usuario', loadChildren: './pages/login-usuario/login-usuario.module#LoginUsuarioPageModule' }
   // { path: 'list-player', loadChildren: './pages/list-player/list-player.module#ListPlayerPageModule' },
   // { path: 'perfil-player', loadChildren: './pages/perfil-player/perfil-player.module#PerfilPlayerPageModule' },
   // { path: 'add-game', loadChildren: './pages/add-game/add-game.module#AddGamePageModule' },
