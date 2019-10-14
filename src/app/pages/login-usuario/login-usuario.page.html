@@ -1,18 +1,18 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-    <ion-title>Login do Cliente</ion-title>
+    <ion-title>Entrar no Sistema</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <form #fc="ngForm" (ngSubmit)="onSubmit(fc)">
+<ion-content class="ion-padding">
+  <form #fc="ngForm" (ngSubmit)="onsubmit(fc)">
     <ion-item>
       <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="email" name="email" [(ngModel)]="email" #e="ngModel" required></ion-input>
+      <ion-input type="email" name="email" [(ngModel)]="email" #e="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></ion-input>
     </ion-item>
+    <ion-text color="danger" *ngIf="e.invalid && e.dirty">
+        <strong>E-mail invalido!</strong>
+      </ion-text>
 
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
@@ -30,16 +30,16 @@
 
 </ion-content>
 
-<ion-content padding>
+<ion-content class="ion-padding">
 
   <ion-button expand="block" fill="outline" color="medium" (click)="loginGoogle()">
-    <ion-icon slot="start" name="logo-google"></ion-icon>
-    Entrar com Google
+    <ion-icon slot="start" name="logo-google" ></ion-icon>
+     Entrar com Google
   </ion-button>
 
   <ion-button expand="block" fill="outline" color="medium" (click)="logout()" href="/tabs">
     <ion-icon name="log-out"></ion-icon>
-    Sair do usuário
+     Sair do usuário
   </ion-button>
 
 </ion-content>

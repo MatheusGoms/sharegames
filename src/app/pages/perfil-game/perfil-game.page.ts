@@ -13,6 +13,12 @@ export class PerfilGamePage implements OnInit {
   protected game: Game = new Game;
   private id: string = null;
 
+  slideOpts = {
+    initialSlide: 1,
+    slidesPerView: 3,
+    speed: 400
+  };
+
   constructor(
     protected gameService: GameService,
     protected activatedRoute: ActivatedRoute

@@ -20,9 +20,11 @@ export class GameService {
         categoria: game.categoria,
         console: game.console,
         quant: game.quant,
-        foto: game.foto,
         valor: game.valor,
-        ativo: game.ativo
+        ativo: game.ativo,
+        fotos: game.fotos,
+        lat: game.lat,
+        lng: game.lng
       });
   }
 

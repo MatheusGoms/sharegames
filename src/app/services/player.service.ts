@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Player } from '../model/player';
 import { map } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 
 @Injectable({
@@ -10,21 +12,27 @@ import { map } from 'rxjs/operators';
 export class PlayerService {
 
   constructor(
-    protected fire: AngularFirestore
+    protected fire: AngularFirestore,
+    public afAuth: AngularFireAuth
   ) { }
 
   save(player) {
-    return this.fire.collection("players")
-      .add({
-        nome: player.nome,
-        nickname: player.nickname,
-        email: player.email,
-        pws: player.pws,
-        foto: player.foto,
-        ativo: player.ativo,
-        lat: player.lat,
-        lng: player.lng
-      });
+    return this.afAuth.auth.createUserWithEmailAndPassword(player.email, player.pws)
+      .then(
+        res => {
+          return this.fire.collection("players").doc(res.user.uid).set({
+              nome: player.nome,
+              nickname: player.nickname,
+             //email: player.email,
+             //pws: player.pws,
+              foto: player.foto,
+              ativo: player.ativo,
+              lat: player.lat,
+              lng: player.lng
+            });
+        }
+      )
+
   }
 
   gelAll() {

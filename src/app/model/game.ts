@@ -4,8 +4,10 @@ export class Game {
     categoria: string; 
     console: string; 
     descricao: string; 
-    foto: string = null;
     quant: number; 
     valor: number; 
     ativo: boolean = true;
+    fotos:string[] = [];
+    lat:number;
+    lng:number;
 }

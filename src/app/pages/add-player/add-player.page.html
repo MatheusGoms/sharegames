@@ -34,13 +34,13 @@
         <ion-input type="password" [(ngModel)]="player.pws" name="pws" required minlength="6" #pws="ngModel">
         </ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="pws.invalid && pws.dirty">Senha muito curta.</ion-text>
+      <ion-text color="danger" *ngIf="pws.invalid && pws.dirty" class="ion-padding">Senha muito curta.</ion-text>
 
       <ion-item>
         <ion-label position="floating">Confirmar Senha</ion-label>
         <ion-input type="password" (ngModel)="conf" name="conf" required #conf="ngModel"></ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="(pws.value != conf.value) && pws.dirty">Senhas diferentes.</ion-text>
+      <ion-text color="danger" *ngIf="(pws.value != conf.value) && pws.dirty" class="ion-padding">Senhas diferentes.</ion-text>
 
       <ion-item lines="none">
         <ion-button type="submit" color="primary" [disabled]="fc.invalid || (pws.value != conf.value)">Salvar

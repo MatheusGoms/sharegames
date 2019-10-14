@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AddGamePage } from './add-game.page';
-
 import { Camera } from '@ionic-native/camera/ngx';
 
 const routes: Routes = [

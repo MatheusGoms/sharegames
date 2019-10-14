@@ -22,7 +22,7 @@ export class ListPlayerPage implements OnInit {
     this.refreshPlayers();
   }
 
-   editar(player) {
+  editar(player) {
     this.router.navigate(['/tabs/addPlayer/', player.key])
   }
 

@@ -23,22 +23,24 @@
 
       <ion-item routerLink="/tabs/perfilGame/{{g.key}}">
         <ion-avatar slot="start">
-          <img src="{{g.foto}}">
+          <img src="assets/box.jpg" *ngIf="!g.fotos">
+          <img [src]="g.fotos[0]" *ngIf="g.fotos">
         </ion-avatar>
         <ion-label>{{ g.nome }}</ion-label>
         <ion-text>{{ g.descricao }}</ion-text>
       </ion-item>
 
       <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="apagar(g)">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>Delete
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
+        <ion-item-option color="danger" (click)="apagar(g)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
 

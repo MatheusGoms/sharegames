@@ -12,7 +12,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   styleUrls: ['./add-player.page.scss'],
 })
 export class AddPlayerPage implements OnInit {
-  
+
   protected player: Player = new Player;
   protected id: any = null;
   protected preview: any = null;
@@ -58,7 +58,7 @@ export class AddPlayerPage implements OnInit {
             this.player = new Player;
             //console.log("Cadastrado!");
             this.presentAlert("Aviso", "Cadastrado!")
-            this.router.navigate(['/tabs/perfilPlayer', res.id]);
+            this.router.navigate(['/']);
           },
           erro => {
             console.log("Erro: " + erro);

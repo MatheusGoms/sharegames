@@ -1,22 +1,28 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title *ngIf="!id">Cadastro do Game</ion-title>
-    <ion-title *ngIf="id">Atualizar do Game</ion-title>
+    <ion-title>Cadastro do Game</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-item lines="none" class="foto">
-        <img src="assets/perfil.png" alt="foto perfil" (click)="tirarFoto()" *ngIf="!preview">
-        
-        <img [src]="preview" alt="foto perfil" (click)="tirarFoto()" *ngIf="preview">
-      </ion-item>
+  <ion-item lines="none" class="foto">
+    <img src="assets/box.jpg" alt="foto perfil" (click)="tirarFoto()" *ngIf="!preview">
+
+    <img [src]="preview[preview.length - 1]" alt="foto perfil" (click)="tirarFoto()" *ngIf="preview">
+  </ion-item>
+
+  <ion-slides pager="true" [options]="slideOpts" *ngIf="preview">
+    <ion-slide *ngFor="let foto of preview; let i = index" (click)="removerFoto(i)">
+      <img src="{{foto}}">
+    </ion-slide>
+  </ion-slides>
+
   <form #fc="ngForm" (ngSubmit)="onsubmit(fc)">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
       <ion-input type="text" [(ngModel)]="game.nome" name="nome" required></ion-input>
     </ion-item>
-
+    <!-- 
     <ion-item>
       <ion-label position="floating">Categoria</ion-label>
       <ion-input type="text" [(ngModel)]="game.categoria" name="categoria" required></ion-input>
@@ -25,6 +31,23 @@
     <ion-item>
       <ion-label position="floating">Console</ion-label>
       <ion-input type="text" [(ngModel)]="game.console" name="console" required></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label>Categoria</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="game.categoria" name="categoria" required>
+        <ion-select-option value="Ação">Ação</ion-select-option>
+        <ion-select-option value="Plataforma">Plataforma</ion-select-option>
+        <ion-select-option value="RPG">RPG</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Categoria</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="game.console" name="console" required>
+        <ion-select-option value="PC">PC</ion-select-option>
+        <ion-select-option value="XBOX">XBOX</ion-select-option>
+        <ion-select-option value="PS4">PS4</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
@@ -41,10 +64,10 @@
       <ion-label position="floating">Valor</ion-label>
       <ion-input type="number" [(ngModel)]="game.valor" name="valor" required></ion-input>
     </ion-item>
-   
+
     <ion-item lines="none">
       <ion-button type="submit" color="primary" [disabled]="fc.invalid">Salvar</ion-button>
-      <ion-button type="reset" color="danger">Cancelar</ion-button>
+      <ion-button type="reset" color="danger" routerLink="/">Cancelar</ion-button>
     </ion-item>
   </form>
 </ion-content>

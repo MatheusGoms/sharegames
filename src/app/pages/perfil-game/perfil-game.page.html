@@ -5,17 +5,20 @@
 </ion-header>
 
 <ion-content>
- 
-    <ion-item lines="none">
-      <img src="https://picsum.photos/100">
-    </ion-item>
 
-    <ion-item>
-      <ion-text>
-        <h2>{{game.nome}}</h2>
-        <p>{{game.descricao}}</p>
-        <p>{{game.console}}</p>
-        <p>{{game.valor}}</p>
-      </ion-text>
-    </ion-item>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let foto of game.fotos">
+      <img src="{{foto}}">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item>
+    <ion-text>
+      <h2>{{game.nome}}</h2>
+      <p>Desrição: {{game.descricao}}</p>
+      <p>Console: {{game.console}}</p>
+      <p>Categoria: {{game.categoria}}</p>
+      <p>Valor: {{game.valor | currency : "BRL"}}</p>
+    </ion-text>
+  </ion-item>
 </ion-content>

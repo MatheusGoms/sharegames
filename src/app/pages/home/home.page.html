@@ -9,7 +9,14 @@
 
 <ion-content>
   <ion-card *ngFor="let game of games" routerLink="/tabs/perfilGame/{{game.key}}">
-    <img src="https://picsum.photos/400/200" />
+    <!-- <img src="{{game.fotos[0]}}" /> -->
+    
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let foto of game.fotos">
+        <img src="{{foto}}">
+      </ion-slide>
+    </ion-slides>
+
     <ion-card-header>
       <ion-card-subtitle>{{game.console}}</ion-card-subtitle>
       <ion-card-title>{{game.nome}}</ion-card-title>
