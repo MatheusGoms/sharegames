@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Device } from '@ionic-native/device/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 
 
 //Firebase ------------------------
@@ -35,7 +37,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
     GooglePlus,
-    Device
+    Device,
+    AndroidPermissions
   ],
   bootstrap: [AppComponent]
 })
