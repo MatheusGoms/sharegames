@@ -1,10 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/model/player';
 import { PlayerService } from 'src/app/services/player.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  MarkerCluster
+} from '@ionic-native/google-maps';
+
+
 
 @Component({
   selector: 'app-add-player',
@@ -19,13 +30,17 @@ export class AddPlayerPage implements OnInit {
   protected posLat: number = 0;
   protected posLng: number = 0;
 
+  protected map: GoogleMap
+
   constructor(
     protected playerService: PlayerService,
     protected alertController: AlertController,
     protected activedRoute: ActivatedRoute,
     protected router: Router,
     private camera: Camera,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private platform: Platform
+
   ) { }
 
   ngOnInit() {
@@ -43,7 +58,10 @@ export class AddPlayerPage implements OnInit {
     this.localAtual()
   }
 
-  onsubmit(form) {
+  async onsubmit(form) {
+    await this.platform.ready();
+    await this.loadMap();
+
     if (!this.preview) {
       this.presentAlert("Erro", "Deve inserir uma foto do perfil!");
     } else {
@@ -121,4 +139,18 @@ export class AddPlayerPage implements OnInit {
     });
     await alert.present();
   }
+
+  loadMap() {
+    this.map = GoogleMaps.create('map_canvas', {
+      'camera': {
+        'target': {
+          "lat": this.player.lat,
+          "lng": this.player.lng,
+        },
+        'zoom': 10
+      }
+    });
+    //this.addCluster(this.dummyData());
+  }
+
 }
