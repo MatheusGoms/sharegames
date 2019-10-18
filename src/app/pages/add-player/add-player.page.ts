@@ -181,6 +181,17 @@ export class AddPlayerPage implements OnInit {
 
          }
         )
+        //colocaar pontos extras
+        this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe(
+          res=>{
+            this.map.addMarker({
+              position:{
+                lat:res.position.lat,
+                lng:res.position.lng
+              }
+            })
+          }
+        )
       }
     );
   }
