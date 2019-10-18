@@ -6,15 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-
 import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
   Marker,
-  MarkerCluster
+  MarkerCluster,
+  MyLocation,
+  LocationService
 } from '@ionic-native/google-maps';
-
 
 
 @Component({
@@ -30,7 +30,8 @@ export class AddPlayerPage implements OnInit {
   protected posLat: number = 0;
   protected posLng: number = 0;
 
-  protected map: GoogleMap
+  protected map: GoogleMap;
+
 
   constructor(
     protected playerService: PlayerService,
@@ -43,7 +44,10 @@ export class AddPlayerPage implements OnInit {
 
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.platform.ready();
+    await this.loadMap();
+
     this.id = this.activedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       this.playerService.get(this.id).subscribe(
@@ -58,10 +62,7 @@ export class AddPlayerPage implements OnInit {
     this.localAtual()
   }
 
-  async onsubmit(form) {
-    await this.platform.ready();
-    await this.loadMap();
-
+  onsubmit(form) {
     if (!this.preview) {
       this.presentAlert("Erro", "Deve inserir uma foto do perfil!");
     } else {
@@ -147,10 +148,43 @@ export class AddPlayerPage implements OnInit {
           "lat": this.player.lat,
           "lng": this.player.lng,
         },
-        'zoom': 10
+        'zoom': 15
       }
     });
-    //this.addCluster(this.dummyData());
+    //  this.addCluster(this.dummyData());
+    this.minhaLocalizacao()
   }
 
+  minhaLocalizacao() {
+    LocationService.getMyLocation().then(
+      (myLocation: MyLocation) => {
+        this.map.setOptions({
+          camera: {
+            target: myLocation.latLng
+          }
+        })
+        let marker:Marker = this.map.addMarkerSync({
+          position: {
+            lat: myLocation.latLng.lat,
+            lng: myLocation.latLng.lng
+          },
+          icon: "#00ff00",
+          title: "Titulo",
+          snippet: "Comentário"
+        })
+
+        marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(
+         res=>{
+          marker.setTitle(this.player.nome)
+          marker.setSnippet(this.player.nickname)
+          marker.showInfoWindow()
+
+         }
+        )
+      }
+    );
+  }
 }
+
+
+
