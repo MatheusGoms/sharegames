@@ -8,7 +8,7 @@
 <ion-content>
   <ion-item lines="none" class="foto">
     <img src="assets/perfil.png" alt="foto perfil" (click)="tirarFoto()" *ngIf="!preview">
-    
+
     <img [src]="preview" alt="foto perfil" (click)="tirarFoto()" *ngIf="preview">
   </ion-item>
 
@@ -23,24 +23,32 @@
       <ion-input type="text" [(ngModel)]="player.nickname" name="nickname" required></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="email" [(ngModel)]="player.email" name="email" required></ion-input>
-    </ion-item>
-
     <div *ngIf="!id">
+      <ion-item>
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input type="email" [(ngModel)]="player.email" name="email" required
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #e="ngModel"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="e.invalid && e.dirty" class="ion-padding">
+        E-mail invalido!
+      </ion-text>
+
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
         <ion-input type="password" [(ngModel)]="player.pws" name="pws" required minlength="6" #pws="ngModel">
         </ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="pws.invalid && pws.dirty" class="ion-padding">Senha muito curta.</ion-text>
+      <ion-text color="danger" *ngIf="pws.invalid && pws.dirty" class="ion-padding">
+        Senha muito curta.
+      </ion-text>
 
       <ion-item>
         <ion-label position="floating">Confirmar Senha</ion-label>
         <ion-input type="password" (ngModel)="conf" name="conf" required #conf="ngModel"></ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="(pws.value != conf.value) && pws.dirty" class="ion-padding">Senhas diferentes.</ion-text>
+      <ion-text color="danger" *ngIf="(pws.value != conf.value) && pws.dirty" class="ion-padding">
+        Senhas diferentes.
+      </ion-text>
 
       <ion-item lines="none">
         <ion-button type="submit" color="primary" [disabled]="fc.invalid || (pws.value != conf.value)">Salvar
@@ -55,7 +63,7 @@
     </ion-item>
   </form>
 
-  <ion-content padding>
+  <ion-content>
     <div class="map" id="map_canvas"></div>
   </ion-content>
   

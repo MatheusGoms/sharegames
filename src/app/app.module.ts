@@ -13,15 +13,11 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
-
-
 //Firebase ------------------------
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +32,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
-    GooglePlus,
+    GooglePlus, 
     Device,
     AndroidPermissions
   ],

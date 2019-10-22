@@ -16,12 +16,12 @@ export class TabsPage {
     protected playerService: PlayerService,
     protected gameService: GameService,
   ) {
-    this.playerService.gelAll().subscribe(
+    this.playerService.getAll().subscribe(
       res=>{
         this.quantPlayer = res.length
       }
     )
-    this.gameService.gelAll().subscribe(
+    this.gameService.getAll().subscribe(
       res=>{
         this.quantGame = res.length
       }

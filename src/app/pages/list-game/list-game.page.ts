@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './list-game.page.html',
   styleUrls: ['./list-game.page.scss'],
 })
+
 export class ListGamePage implements OnInit {
 
   protected games: any;
@@ -19,7 +20,7 @@ export class ListGamePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.gameService.gelAll().subscribe(
+    this.gameService.getAll().subscribe(
       res => {
         this.games = res;
       }
@@ -32,7 +33,7 @@ export class ListGamePage implements OnInit {
 
   async doRefresh(event) {
     //console.log('Begin async operation');
-    this.gameService.gelAll().subscribe(
+    this.gameService.getAll().subscribe(
       res => {
         this.games = res;
         setTimeout(() => {
@@ -75,7 +76,7 @@ export class ListGamePage implements OnInit {
   }
 
   refreshGames() {
-    this.gameService.gelAll().subscribe(
+    this.gameService.getAll().subscribe(
       res => {
         this.games = res;
       }

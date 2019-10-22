@@ -3,9 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { MesagemService } from 'src/app/services/mesagem.service';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx'
 import { Device } from '@ionic-native/device/ngx';
-
 
 @Component({
   selector: 'app-login-usuario',
@@ -29,16 +28,14 @@ export class LoginUsuarioPage implements OnInit {
   }
 
   onsubmit(form) {
-
     this.login();
-
   }
 
   login() {
     this.msg.presentLoading();
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.pws).then(
       res => {
-        console.log(res.user);    
+        console.log(res.user);
         this.msg.dismissLoading();
         this.router.navigate(['/'])
       },
@@ -56,25 +53,28 @@ export class LoginUsuarioPage implements OnInit {
     this.afAuth.auth.signOut();
   }
 
-  loginGoogle(){
+  loginGoogle() {
     console.log('Device is: ', this.device.platform);
-    if (this.device.platform == "browser"){
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
-      res=>{
-        console.log(res);
-        this.router.navigate(['/'])
-      },
-      erro=>{
-        console.log("Erro: ", erro);
-        this.msg.presentAlert("Erro!", "Login invalidos!");
-      }
-    )} else {
+    if (this.device.platform == "browser") {
+      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+        res => {
+          console.log(res);
+          this.router.navigate(['/'])
+        },
+        erro => {
+          console.log("Erro: ", erro);
+          this.msg.presentAlert("Erro!", "Login invalido!");
+        }
+      )
+    } else {
       this.loginGooglePlus();
     }
   }
-   loginGooglePlus(){
+
+  loginGooglePlus() {
     this.googlePlus.login({})
-    .then(res => console.log(res))
-    .catch(err => console.error(err));
-   }
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
+  }
+
 }

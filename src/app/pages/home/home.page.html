@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card *ngFor="let game of games" routerLink="/tabs/perfilGame/{{game.key}}">
     <!-- <img src="{{game.fotos[0]}}" /> -->
-    
+
     <ion-slides pager="true" [options]="slideOpts">
       <ion-slide *ngFor="let foto of game.fotos">
         <img src="{{foto}}">

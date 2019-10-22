@@ -18,7 +18,13 @@
       <p>Desrição: {{game.descricao}}</p>
       <p>Console: {{game.console}}</p>
       <p>Categoria: {{game.categoria}}</p>
+      <p>Lat: {{game.lat}}</p>
+      <p>Lng: {{game.lng}}</p>
       <p>Valor: {{game.valor | currency : "BRL"}}</p>
     </ion-text>
   </ion-item>
+</ion-content>
+
+<ion-content>
+  <div class="map" id="map_canvas"></div>
 </ion-content>

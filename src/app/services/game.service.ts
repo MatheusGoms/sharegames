@@ -28,7 +28,7 @@ export class GameService {
       });
   }
 
-  gelAll() {
+  getAll() {
     return this.fire.collection("games").snapshotChanges()
       .pipe(
         map(dados =>
